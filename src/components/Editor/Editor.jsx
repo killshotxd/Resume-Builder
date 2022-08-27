@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputControl from "../InputControl/InputControl";
 import styles from "./Editor.module.css";
 const Editor = (props) => {
   const sections = props.sections;
@@ -11,10 +12,19 @@ const Editor = (props) => {
     <div className={styles.container}>
       <div className={styles.header}>
         {Object.keys(sections)?.map((key) => (
-          <div className={styles.section} key={key}>
+          <div
+            className={`${styles.section} ${
+              activeSectionKey === key ? styles.active : ""
+            }`}
+            key={key}
+            onClick={() => setActiveSectionKey(key)}
+          >
             {sections[key]}
           </div>
         ))}
+      </div>
+      <div className={styles.body}>
+        <InputControl label="Title" />
       </div>
     </div>
   );
